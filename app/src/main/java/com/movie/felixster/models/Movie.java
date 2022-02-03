@@ -23,7 +23,7 @@ public class Movie {
 
     // get the List of Movies from the json array
     @NonNull
-    public static List<Movie> getMovies(@NonNull JSONArray movieJsonArray) throws JSONException {
+    public static List<Movie> getListOfMovies(@NonNull JSONArray movieJsonArray) throws JSONException {
         List<Movie> movies = new ArrayList<>();
 
         for (int i=0; i<movieJsonArray.length(); i++){
@@ -43,5 +43,14 @@ public class Movie {
 
     public String getOverview() {
         return overview;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                ", overview='" + overview + '\'' +
+                '}';
     }
 }
