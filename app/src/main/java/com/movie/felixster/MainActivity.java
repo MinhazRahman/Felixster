@@ -1,17 +1,22 @@
 package com.movie.felixster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.movie.felixster.adapters.MovieAdapter;
 import com.movie.felixster.models.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -22,11 +27,25 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
 
     List<Movie> movies;
+    RecyclerView recyclerViewMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        recyclerViewMovies = findViewById(R.id.recyclerViewMovies);
+        movies = new ArrayList<>();
+
+        // create an adapter
+        // this refers to MainActivity, which is an instance of Context
+        MovieAdapter movieAdapter = new MovieAdapter(this, movies);
+
+        // set the adapter on the RecyclerView
+        recyclerViewMovies.setAdapter(movieAdapter);
+
+        // set a layout manager on the RecyclerView
+        recyclerViewMovies.setLayoutManager(new LinearLayoutManager(this));
 
         // sending a GET request to the Movie Database API
         // create an AsyncHttpClient, and
@@ -39,7 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    movies = Movie.getListOfMovies(results);
+
+                    // update the list of movies
+                    movies.addAll(Movie.getListOfMovies(results));
+
+                    // whenever the list of movies is updated, notify the adapter
+                    movieAdapter.notifyDataSetChanged();
 
                     Log.i(TAG, "Results: " + results);
                     Log.i(TAG, String.valueOf(movies));
