@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageViewPoster"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"/>
+        android:layout_marginTop="0dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textViewMovieTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imageViewPoster"
         android:layout_marginStart="5dp"
-        tools:textSize="22sp"
-        tools:text="Spider-Man: No Way Home" />
+        android:layout_toEndOf="@id/imageViewPoster"
+        tools:text="Spider-Man: No Way Home"
+        tools:textSize="22sp" />
 
     <TextView
         android:id="@+id/textViewMovieOverview"
