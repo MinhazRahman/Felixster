@@ -16,12 +16,14 @@ import java.util.List;
 public class Movie {
     String title;
     String posterPath;
+    String backdropPath;
     String overview;
 
     // construct the Movie object
     public Movie(@NonNull JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("title");
         posterPath = jsonObject.getString("poster_path");
+        backdropPath = jsonObject.getString("backdrop_path");
         overview = jsonObject.getString("overview");
     }
 
@@ -46,6 +48,13 @@ public class Movie {
         String posterSize = "w342";
 
         return secureBaseUrl + posterSize + posterPath;
+    }
+
+    public String getBackdropPath() {
+        String secureBaseUrl = "https://image.tmdb.org/t/p/";
+        String backdropSize = "w300";
+
+        return secureBaseUrl + backdropSize + backdropPath;
     }
 
     public String getOverview() {
