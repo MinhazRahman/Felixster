@@ -2,6 +2,8 @@ package com.movie.felixster.adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.text.LineBreaker;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +67,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         public void bind(Movie movie) {
             textViewMovieTitle.setText(movie.getTitle());
+            // set inter_word justification mode for overview
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+                textVieMovieOverview.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+            }
             textVieMovieOverview.setText(movie.getOverview());
 
             // get image url depending on landscape or portrait mode
