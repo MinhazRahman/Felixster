@@ -1,6 +1,7 @@
 package com.movie.felixster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.movie.felixster.adapters.MovieAdapter;
 import com.movie.felixster.models.Movie;
+import com.movie.felixster.util.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
         // set a layout manager on the RecyclerView
         recyclerViewMovies.setLayoutManager(new LinearLayoutManager(this));
+
+        // decorate each item using decorators attached to the recyclerview
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+
+        // attach a decorator to  the recyclerview for adding consistent spacing around items displayed
+        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
+
+        recyclerViewMovies.addItemDecoration(itemDecoration);
+        recyclerViewMovies.addItemDecoration(decoration);
 
         // sending a GET request to the Movie Database API
         // create an AsyncHttpClient, and
