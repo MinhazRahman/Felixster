@@ -33,5 +33,9 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageViewPoster"
+        android:minLines="1"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:singleLine="false"
         tools:text="Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man." />
 </RelativeLayout>

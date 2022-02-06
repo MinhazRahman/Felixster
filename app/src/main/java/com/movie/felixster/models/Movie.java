@@ -1,10 +1,6 @@
 package com.movie.felixster.models;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
-
-import com.movie.felixster.util.ImageURL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,14 +41,14 @@ public class Movie {
 
     public String getPosterPath() {
         String secureBaseUrl = "https://image.tmdb.org/t/p/";
-        String posterSize = "w342";
+        String posterSize = "w500";
 
         return secureBaseUrl + posterSize + posterPath;
     }
 
     public String getBackdropPath() {
         String secureBaseUrl = "https://image.tmdb.org/t/p/";
-        String backdropSize = "w300";
+        String backdropSize = "w780";
 
         return secureBaseUrl + backdropSize + backdropPath;
     }
