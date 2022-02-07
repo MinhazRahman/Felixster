@@ -22,6 +22,7 @@
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@id/imageViewPoster"
         android:textStyle="bold"
+        android:textColor="@color/black"
         tools:text="Spider-Man: No Way Home"
         tools:textSize="22sp" />
 
@@ -33,6 +34,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageViewPoster"
+        android:textColor="@color/black"
         android:minLines="1"
         android:maxLines="4"
         android:ellipsize="end"
