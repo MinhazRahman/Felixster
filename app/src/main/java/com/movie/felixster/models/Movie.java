@@ -14,6 +14,7 @@ public class Movie {
     String posterPath;
     String backdropPath;
     String overview;
+    double voteAverage;
 
     // construct the Movie object
     public Movie(@NonNull JSONObject jsonObject) throws JSONException {
@@ -21,6 +22,7 @@ public class Movie {
         posterPath = jsonObject.getString("poster_path");
         backdropPath = jsonObject.getString("backdrop_path");
         overview = jsonObject.getString("overview");
+        voteAverage = jsonObject.getDouble("vote_average");
     }
 
     // get the List of Movies from the json array
@@ -55,6 +57,10 @@ public class Movie {
 
     public String getOverview() {
         return overview;
+    }
+
+    public double getVoteAverage() {
+        return voteAverage;
     }
 
     @Override

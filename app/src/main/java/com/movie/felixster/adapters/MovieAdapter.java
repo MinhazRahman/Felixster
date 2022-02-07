@@ -22,6 +22,7 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     Context context;
     List<Movie> movies;
+    int POPULAR = 1, LESS_POPULAR = 0, STARS = 7;
 
     public MovieAdapter(Context context, List<Movie> movies){
         this.context = context;
@@ -32,9 +33,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
+        ViewHolder viewHolder;
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        return new ViewHolder(movieView);
+        if (viewType == POPULAR){
+            View movieView1 = layoutInflater.inflate(R.layout.item_image_movie, parent, false);
+            viewHolder = new ViewHolder(movieView1);
+        }
+        else {
+            View movieView2 = layoutInflater.inflate(R.layout.item_movie, parent, false);
+            viewHolder = new ViewHolder(movieView2);
+        }
+
+        //View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
+
+        return viewHolder;
     }
 
     // populate the data into the item through holder
@@ -43,8 +56,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         // get the movie at the given position
         Movie movie = movies.get(position);
 
-        // bind the movie data in the ViewHolder
-        holder.bind(movie);
+        // bind the movie data in the ViewHolder based on the popularity
+        if (holder.getItemViewType() == POPULAR){
+            holder.bindPopular(movie);
+        }
+        else {
+            holder.bind(movie);
+        }
     }
 
     // returns the total count of items in the list
@@ -53,16 +71,27 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         return movies.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (movies.get(position).getVoteAverage() > STARS){
+            return POPULAR;
+        }else {
+            return LESS_POPULAR;
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageViewPoster;
         TextView textViewMovieTitle;
         TextView textVieMovieOverview;
+        ImageView imageViewBackdrop;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewPoster = itemView.findViewById(R.id.imageViewPoster);
             textViewMovieTitle = itemView.findViewById(R.id.textViewMovieTitle);
             textVieMovieOverview = itemView.findViewById(R.id.textViewMovieOverview);
+            imageViewBackdrop = itemView.findViewById(R.id.imageViewBackdrop);
         }
 
         public void bind(Movie movie) {
@@ -86,6 +115,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     load(imageUrl).
                     placeholder(R.drawable.ic_placeholder_image_128).
                     into(imageViewPoster);
+        }
+
+        public void bindPopular(Movie movie){
+            // get image url depending on landscape or portrait mode
+            String imageUrl;
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                imageUrl = movie.getBackdropPath();
+            }
+            else {
+                imageUrl = movie.getPosterPath();
+            }
+            Glide.
+                    with(context).
+                    load(imageUrl).
+                    placeholder(R.drawable.ic_placeholder_image_128).
+                    into(imageViewBackdrop);
         }
     }
 }
