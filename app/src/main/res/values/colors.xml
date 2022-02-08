@@ -13,4 +13,8 @@
     <color name="deep_orange_primary">#bf360c</color>
     <color name="deep_orange_light">#f9683a</color>
     <color name="deep_orange_dark">#870000</color>
+    <color name="dark_theme_status_bar">#000000</color>
+    <color name="dark_theme_app_bar">#212121</color>
+    <color name="dark_theme_background">#303030</color>
+    <color name="dark_theme_cards_dialogs">#424242</color>
 </resources>
