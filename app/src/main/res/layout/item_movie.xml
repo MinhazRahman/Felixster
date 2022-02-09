@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background= "@color/dark_theme_cards_dialogs"
+    android:id="@+id/container_movie"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/dark_theme_cards_dialogs">
 
     <ImageView
         android:id="@+id/imageViewPoster"
@@ -14,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:scaleType="fitXY"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -24,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@id/imageViewPoster"
-        android:textStyle="bold"
         android:textColor="@color/white"
+        android:textStyle="bold"
         tools:text="Spider-Man: No Way Home"
         tools:textSize="22sp" />
 
@@ -37,10 +38,10 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageViewPoster"
-        android:textColor="@color/white"
-        android:minLines="1"
-        android:maxLines="4"
         android:ellipsize="end"
+        android:maxLines="4"
+        android:minLines="1"
         android:singleLine="false"
+        android:textColor="@color/white"
         tools:text="Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man." />
 </RelativeLayout>
