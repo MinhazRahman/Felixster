@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background= "@color/light_theme_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MovieDetailActivity"
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:textColor="@color/black"
         tools:text="Spider man: No way home" />
 
     <RatingBar
@@ -26,6 +28,7 @@
 
     <TextView
         android:id="@+id/textViewOverview"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man." />
