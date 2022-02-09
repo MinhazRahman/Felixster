@@ -1,6 +1,7 @@
 package com.movie.felixster.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
@@ -8,14 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.movie.felixster.MovieDetailActivity;
 import com.movie.felixster.R;
 import com.movie.felixster.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -81,6 +86,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        RelativeLayout containerMovie;
+        RelativeLayout containerMovieImage;
         ImageView imageViewPoster;
         TextView textViewMovieTitle;
         TextView textVieMovieOverview;
@@ -88,6 +95,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            containerMovie = itemView.findViewById(R.id.container_movie);
+            containerMovieImage = itemView.findViewById(R.id.container_movie_image);
             imageViewPoster = itemView.findViewById(R.id.imageViewPoster);
             textViewMovieTitle = itemView.findViewById(R.id.textViewMovieTitle);
             textVieMovieOverview = itemView.findViewById(R.id.textViewMovieOverview);
@@ -115,6 +124,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     load(imageUrl).
                     placeholder(R.drawable.ic_placeholder_image_128).
                     into(imageViewPoster);
+
+            // Register click listener on whole row
+            containerMovie.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Navigate to the MovieDetailActivity on tap
+                    Intent intent = new Intent(context, MovieDetailActivity.class);
+                    // Wrap movie object with Parcels.wrap()
+                    intent.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(intent);
+                }
+            });
+
         }
 
         public void bindPopular(Movie movie){
@@ -131,6 +153,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     load(imageUrl).
                     placeholder(R.drawable.ic_placeholder_image_128).
                     into(imageViewBackdrop);
+
+            // Register click listener on whole row
+            containerMovieImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Navigate to the MovieDetailActivity on tap
+                    Intent intent = new Intent(context, MovieDetailActivity.class);
+                    // Wrap movie object with Parcels.wrap()
+                    intent.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
