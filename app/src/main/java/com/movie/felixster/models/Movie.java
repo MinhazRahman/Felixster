@@ -5,16 +5,21 @@ import androidx.annotation.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Movie {
     String title;
     String posterPath;
     String backdropPath;
     String overview;
     double voteAverage;
+
+    // Empty constructor required by the Parceler library
+    public Movie(){}
 
     // construct the Movie object
     public Movie(@NonNull JSONObject jsonObject) throws JSONException {
