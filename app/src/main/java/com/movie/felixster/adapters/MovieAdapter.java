@@ -28,9 +28,11 @@ import org.parceler.Parcels;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
+    private static final int POPULAR = 1, LESS_POPULAR = 0;
+    private static final double STAR_RATING_FOR_POPULAR_MOVIE = 7;
+
     Context context;
     List<Movie> movies;
-    int POPULAR = 1, LESS_POPULAR = 0, STARS = 7;
 
     public MovieAdapter(Context context, List<Movie> movies){
         this.context = context;
@@ -81,7 +83,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
-        if (movies.get(position).getVoteAverage() > STARS){
+        if (movies.get(position).getVoteAverage() > STAR_RATING_FOR_POPULAR_MOVIE){
             return POPULAR;
         }else {
             return LESS_POPULAR;
