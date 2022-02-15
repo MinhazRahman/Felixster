@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.movie.felixster.activities.MovieDetailActivity;
 import com.movie.felixster.R;
 import com.movie.felixster.models.Movie;
@@ -122,11 +125,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             else {
                 imageUrl = movie.getPosterPath();
             }
+
+            // Both new CenterInside() and new CenterCrop() work to get rounder corner images
             Glide.
-                    with(context).
-                    load(imageUrl).
-                    placeholder(R.drawable.ic_placeholder_image_128).
-                    into(imageViewPoster);
+                    with(context)
+                    .load(imageUrl)
+                    .transform(new CenterInside(), new RoundedCorners(24))
+                    .placeholder(R.drawable.ic_placeholder_image_128)
+                    .into(imageViewPoster);
 
             // Register click listener on whole row
             containerMovie.setOnClickListener(new View.OnClickListener() {
@@ -151,11 +157,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             else {
                 imageUrl = movie.getPosterPath();
             }
+
+            // Both new CenterInside() and new CenterCrop() work to get rounder corner images
             Glide.
-                    with(context).
-                    load(imageUrl).
-                    placeholder(R.drawable.ic_placeholder_image_128).
-                    into(imageViewBackdrop);
+                    with(context)
+                    .load(imageUrl)
+                    .transform(new CenterCrop(), new RoundedCorners(24))
+                    .placeholder(R.drawable.ic_placeholder_image_128)
+                    .into(imageViewBackdrop);
 
             // Register click listener on whole row
             containerMovieImage.setOnClickListener(new View.OnClickListener() {
