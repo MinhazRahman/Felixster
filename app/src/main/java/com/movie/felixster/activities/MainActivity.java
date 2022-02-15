@@ -1,4 +1,4 @@
-package com.movie.felixster;
+package com.movie.felixster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.movie.felixster.R;
 import com.movie.felixster.adapters.MovieAdapter;
 import com.movie.felixster.models.Movie;
 import com.movie.felixster.util.SpacesItemDecoration;

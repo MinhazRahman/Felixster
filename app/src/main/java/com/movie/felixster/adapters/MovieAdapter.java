@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.movie.felixster.MovieDetailActivity;
+import com.movie.felixster.activities.MovieDetailActivity;
 import com.movie.felixster.R;
 import com.movie.felixster.models.Movie;
 

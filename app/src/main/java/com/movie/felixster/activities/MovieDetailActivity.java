@@ -1,4 +1,4 @@
-package com.movie.felixster;
+package com.movie.felixster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.movie.felixster.R;
 import com.movie.felixster.models.Movie;
 
 import org.json.JSONArray;
