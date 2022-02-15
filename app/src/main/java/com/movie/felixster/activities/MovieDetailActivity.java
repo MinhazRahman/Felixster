@@ -1,7 +1,5 @@
 package com.movie.felixster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RatingBar;
@@ -26,6 +24,9 @@ import okhttp3.Headers;
 public class MovieDetailActivity extends YouTubeBaseActivity {
     private static final String YOUTUBE_API_KEY = "AIzaSyD0_t9POZb-IS5ZtmfAarf4kYUiWC7gK_U";
     private static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    private static final double STAR_RATING_FOR_POPULAR_MOVIE = 7.0;
+
+    double movieRating;
 
     YouTubePlayerView youTubePlayerView;
     TextView textViewTitle;
@@ -45,6 +46,13 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
         // Unwrap the Parcel object
         Movie movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
 
+        // Extract the properties of the movie object
+        textViewTitle.setText(movie.getTitle());
+        ratingBar.setRating((float) movie.getVoteAverage());
+        textViewOverview.setText(movie.getOverview());
+
+        movieRating = movie.getVoteAverage();
+
         // send request to movie db api
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.get(String.format(VIDEOS_URL, movie.getMovieId()), new JsonHttpResponseHandler() {
@@ -61,7 +69,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
                     }
                     // get the key from the json object
                     String youtubeKey = results.getJSONObject(0).getString("key");
-                    initializeYoutube(youtubeKey);
+                    initializeYoutube(youtubeKey, movieRating);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -72,20 +80,20 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
                 Log.d("MovieDetailActivity", "onFailure");
             }
         });
-
-        // Extract the properties of the movie object
-        textViewTitle.setText(movie.getTitle());
-        ratingBar.setRating((float) movie.getVoteAverage());
-        textViewOverview.setText(movie.getOverview());
-
     }
 
-    private void initializeYoutube(final String youtubeKey) {
+    private void initializeYoutube(final String youtubeKey, double rating) {
         // Streaming Youtube Videos with YouTubePlayerView
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.cueVideo(youtubeKey);
+                if (rating >= STAR_RATING_FOR_POPULAR_MOVIE){
+                    // load and automatically play the video
+                    youTubePlayer.loadVideo(youtubeKey);
+                }else {
+                    // just load the video and the thumbnail but don't autoplay
+                    youTubePlayer.cueVideo(youtubeKey);
+                }
             }
 
             @Override
