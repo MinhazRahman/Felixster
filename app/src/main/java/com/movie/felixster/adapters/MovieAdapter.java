@@ -92,6 +92,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         TextView textViewMovieTitle;
         TextView textVieMovieOverview;
         ImageView imageViewBackdrop;
+        ImageView iconPlay;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,6 +102,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             textViewMovieTitle = itemView.findViewById(R.id.textViewMovieTitle);
             textVieMovieOverview = itemView.findViewById(R.id.textViewMovieOverview);
             imageViewBackdrop = itemView.findViewById(R.id.imageViewBackdrop);
+            iconPlay = itemView.findViewById(R.id.iconPlay);
+
         }
 
         public void bind(Movie movie) {
