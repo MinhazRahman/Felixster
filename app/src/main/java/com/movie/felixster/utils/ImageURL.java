@@ -1,4 +1,4 @@
-package com.movie.felixster.util;
+package com.movie.felixster.utils;
 
 import android.util.Log;
 

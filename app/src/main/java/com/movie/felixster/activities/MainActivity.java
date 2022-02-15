@@ -13,7 +13,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.movie.felixster.R;
 import com.movie.felixster.adapters.MovieAdapter;
 import com.movie.felixster.models.Movie;
-import com.movie.felixster.util.SpacesItemDecoration;
+import com.movie.felixster.utils.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
