@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
+
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -14,6 +16,8 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.movie.felixster.R;
+import com.movie.felixster.databinding.ActivityMainBinding;
+import com.movie.felixster.databinding.ActivityMovieDetailBinding;
 import com.movie.felixster.models.Movie;
 
 import org.json.JSONArray;
@@ -28,6 +32,11 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
     private static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     private static final double STAR_RATING_FOR_POPULAR_MOVIE = 7.0;
 
+    // Store the binding
+    // If the XML Layout name is activity_movie_detail.xml then DataBinding class name
+    // will be ActivityMovieDetailBinding.
+    private ActivityMovieDetailBinding binding;
+
     double movieRating;
 
     YouTubePlayerView youTubePlayerView;
@@ -38,12 +47,15 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        // Inflate the content view (replacing `setContentView`)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
 
-        youTubePlayerView = findViewById(R.id.player);
-        textViewTitle = findViewById(R.id.textViewTitle);
-        textViewOverview = findViewById(R.id.textViewOverview);
-        ratingBar = findViewById(R.id.ratingBar);
+        // The most basic thing we get with data binding is the elimination of findViewById
+        // Store the field now without any need for casting
+        youTubePlayerView = binding.player;
+        textViewTitle = binding.textViewTitle;
+        textViewOverview = binding.textViewOverview;
+        ratingBar = binding.ratingBar;
 
         // Unwrap the Parcel object
         Movie movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
