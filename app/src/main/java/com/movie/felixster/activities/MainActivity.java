@@ -1,6 +1,7 @@
 package com.movie.felixster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.movie.felixster.R;
 import com.movie.felixster.adapters.MovieAdapter;
+import com.movie.felixster.databinding.ActivityMainBinding;
 import com.movie.felixster.models.Movie;
 import com.movie.felixster.utils.SpacesItemDecoration;
 
@@ -29,15 +31,21 @@ public class MainActivity extends AppCompatActivity {
     public static final String URL_NOW_PLAYING = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     public static final String TAG = "MainActivity";
 
+    // Store the binding
+    private ActivityMainBinding binding;
+
     List<Movie> movies;
     RecyclerView recyclerViewMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        // Inflate the content view (replacing `setContentView`)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        recyclerViewMovies = findViewById(R.id.recyclerViewMovies);
+        // The most basic thing we get with data binding is the elimination of findViewById
+        // Store the field now without any need for casting
+        recyclerViewMovies = binding.recyclerViewMovies;
         movies = new ArrayList<>();
 
         // create an adapter
