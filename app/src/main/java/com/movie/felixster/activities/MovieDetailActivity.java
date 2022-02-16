@@ -1,5 +1,7 @@
 package com.movie.felixster.activities;
 
+import android.graphics.text.LineBreaker;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RatingBar;
@@ -49,6 +51,11 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
         // Extract the properties of the movie object
         textViewTitle.setText(movie.getTitle());
         ratingBar.setRating((float) movie.getVoteAverage());
+
+        // set inter_word justification mode for movie overview
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            textViewOverview.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+        }
         textViewOverview.setText(movie.getOverview());
 
         movieRating = movie.getVoteAverage();
