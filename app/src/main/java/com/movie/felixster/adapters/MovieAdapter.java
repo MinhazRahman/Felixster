@@ -71,7 +71,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             holder.bindPopular(movie);
         }
         else {
-            holder.bind(movie);
+            holder.bindLessPopular(movie);
         }
     }
 
@@ -111,7 +111,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         }
 
-        public void bind(Movie movie) {
+        public void bindLessPopular(Movie movie) {
             textViewMovieTitle.setText(movie.getTitle());
             // set inter_word justification mode for overview
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
