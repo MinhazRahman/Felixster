@@ -15,6 +15,7 @@ import com.movie.felixster.R;
 import com.movie.felixster.adapters.MovieAdapter;
 import com.movie.felixster.databinding.ActivityMainBinding;
 import com.movie.felixster.models.Movie;
+import com.movie.felixster.utils.EnvReader;
 import com.movie.felixster.utils.SpacesItemDecoration;
 
 import org.json.JSONArray;
@@ -28,7 +29,6 @@ import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String URL_NOW_PLAYING = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     public static final String TAG = "MainActivity";
 
     // Store the binding
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         // create an AsyncHttpClient, and
         // then execute a request specifying an anonymous class as a callback
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        asyncHttpClient.get(URL_NOW_PLAYING, new JsonHttpResponseHandler() {
+        asyncHttpClient.get(EnvReader.getUrlNowPlaying(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess");

@@ -19,6 +19,7 @@ import com.movie.felixster.R;
 import com.movie.felixster.databinding.ActivityMainBinding;
 import com.movie.felixster.databinding.ActivityMovieDetailBinding;
 import com.movie.felixster.models.Movie;
+import com.movie.felixster.utils.EnvReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +29,6 @@ import org.parceler.Parcels;
 import okhttp3.Headers;
 
 public class MovieDetailActivity extends YouTubeBaseActivity {
-    private static final String YOUTUBE_API_KEY = "AIzaSyD0_t9POZb-IS5ZtmfAarf4kYUiWC7gK_U";
-    private static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     private static final double STAR_RATING_FOR_POPULAR_MOVIE = 7.0;
 
     // Store the binding
@@ -74,7 +73,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
 
         // send request to movie db api
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        asyncHttpClient.get(String.format(VIDEOS_URL, movie.getMovieId()), new JsonHttpResponseHandler() {
+        asyncHttpClient.get(String.format(EnvReader.getVideosUrl(), movie.getMovieId()), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                JSONObject jsonObject = json.jsonObject;
@@ -103,7 +102,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
 
     private void initializeYoutube(final String youtubeKey, double rating) {
         // Streaming Youtube Videos with YouTubePlayerView
-        youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+        youTubePlayerView.initialize(EnvReader.getYoutubeApiKey(), new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 if (rating >= STAR_RATING_FOR_POPULAR_MOVIE){
