@@ -1,5 +1,6 @@
 package com.movie.felixster.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,12 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CenterInside;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.movie.felixster.activities.MainActivity;
 import com.movie.felixster.activities.MovieDetailActivity;
 import com.movie.felixster.R;
 import com.movie.felixster.models.Movie;
@@ -144,7 +147,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     Intent intent = new Intent(context, MovieDetailActivity.class);
                     // Wrap movie object with Parcels.wrap()
                     intent.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(intent);
+
+                    // Get the transition name from the string
+                    String transitionName = String.valueOf(R.string.transition);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, view, transitionName);
+
+                    context.startActivity(intent, options.toBundle());
                 }
             });
 
@@ -176,7 +185,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     Intent intent = new Intent(context, MovieDetailActivity.class);
                     // Wrap movie object with Parcels.wrap()
                     intent.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(intent);
+
+                    // Get the transition name from the string
+                    String transitionName = String.valueOf(R.string.transition);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, view, transitionName);
+
+                    context.startActivity(intent, options.toBundle());
                 }
             });
         }
