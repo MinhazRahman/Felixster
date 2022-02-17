@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -119,5 +120,10 @@ public class MovieDetailActivity extends YouTubeBaseActivity {
                 Log.d("MovieDetailActivity", "onInitializationFailure");
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        ActivityCompat.finishAfterTransition(this);
     }
 }
