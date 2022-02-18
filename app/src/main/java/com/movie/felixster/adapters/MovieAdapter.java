@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -148,10 +149,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     // Wrap movie object with Parcels.wrap()
                     intent.putExtra("movie", Parcels.wrap(movie));
 
-                    // Get the transition name from the string
-                    String transitionName = String.valueOf(R.string.transition);
+                    // Multiple shared elements
+                    Pair<View, String> p1 = Pair.create(imageViewPoster, imageViewPoster.getTransitionName());
+                    Pair<View, String> p2 = Pair.create(textViewMovieTitle, textViewMovieTitle.getTransitionName());
+                    Pair<View, String> p3 = Pair.create(textVieMovieOverview, textVieMovieOverview.getTransitionName());
+
                     ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation((Activity) context, view, transitionName);
+                            makeSceneTransitionAnimation((Activity) context, p1, p2);
 
                     context.startActivity(intent, options.toBundle());
                 }
